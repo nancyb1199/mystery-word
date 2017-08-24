@@ -4,6 +4,16 @@ button {
   background-color: #eae4ff;
 }
 
+.guess {
+  display: flex;
+  flex-direction: row;
+}
+
+.class {
+  padding-right: 5px;
+  margin: 5px;
+}
+
 h3 {
   font-size: 38px;
 }

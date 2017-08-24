@@ -50,6 +50,12 @@ function playGame(req, res) {
       req.session.board_array[i] = req.session.letter;
       req.session.used_letters.push(req.session.letter);
       found = true;
+      // if (req.session.board_array === req.session.solution) {
+      if (JSON.stringify(req.session.board_array) == JSON.stringify(req.session.solution_letters)) {
+        req.session.win = true;
+        console.log("winner!");
+        // res.redirect('./complete');
+      }
       } // if stmt
     } // for loop
     if (!found) {
@@ -57,7 +63,8 @@ function playGame(req, res) {
       req.session.guesses_left = req.session.guesses_left-1;
       console.log(req.session.guesses_left);
       if (req.session.guesses_left === 0) {
-        res.redirect('./complete');
+        req.session.win = false;
+        // res.redirect('./complete');
         }
       }
   res.render("board", req.session);
