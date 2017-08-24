@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>Mystery Word</title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Mystery Word</h1>
+      <h2>You have {{guesses_left}} guesses left </h2>
+      <h3>{{board_array}}</h3>
+      <form action="/board" method="post">
+      <input type="text" name="letter" placeholder="Enter a letter" maxlength="1"/>
+      <button id=subbtn type="submit">Make a Guess</button>
+      </form>
+      <h4>Letters guessed: {{used_letters}}</h4>
+    </div>
+  </body>
+</html>
