@@ -44,18 +44,22 @@ function setGame(req, res) {
 }
 
 function playGame(req, res) {
+  let found = false;
   for (i = 0; i < req.session.solution_letters.length; i++ ){
     if (req.session.letter === req.session.solution_letters[i]) {
       req.session.board_array[i] = req.session.letter;
       req.session.used_letters.push(req.session.letter);
-    } // if stmt
-    else {
+      found = true;
+      } // if stmt
+    } // for loop
+    if (!found) {
+      req.session.used_letters.push(req.session.letter);
       req.session.guesses_left = req.session.guesses_left-1;
-      if (req.session.guesses_left = 0) {
+      console.log(req.session.guesses_left);
+      if (req.session.guesses_left === 0) {
         res.redirect('./complete');
+        }
       }
-    } //else
-  } // for loop
   res.render("board", req.session);
 }
 
