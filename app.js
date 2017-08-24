@@ -30,13 +30,13 @@ function setGame(req, res) {
     req.session.solution = words[Math.floor(Math.random() * words.length)];
     req.session.used_letters = [];
     req.session.guesses_left = 8;
-    }
     console.log(req.session.solution);
     req.session.solution_letters = [... req.session.solution];
     req.session.board_array = [];
       for (i = 0; i < req.session.solution_letters.length; i++) {
         req.session.board_array.push("_ ");
       }
+    }
   console.log(req.session.board_array);
   console.log(req.session.guesses_left);
   res.render("board", req.session);
