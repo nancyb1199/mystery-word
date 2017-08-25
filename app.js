@@ -41,34 +41,29 @@ function setGame(req, res) {
   console.log(req.session.guesses_left);
   res.render("board", req.session);
   console.log(req.session);
-}
+} // end setGame
+
+// function gameComplete(req, res) {
+//   res.render('complete', req.session);
+// } // end gameComplete
 
 function playGame(req, res) {
   let found = false;
   for (i = 0; i < req.session.solution_letters.length; i++ ){
     if (req.session.letter === req.session.solution_letters[i]) {
       req.session.board_array[i] = req.session.letter;
-      req.session.used_letters.push(req.session.letter);
       found = true;
-      // if (req.session.board_array === req.session.solution) {
-      if (JSON.stringify(req.session.board_array) == JSON.stringify(req.session.solution_letters)) {
-        req.session.win = true;
-        console.log("winner!");
-        // res.redirect('./complete');
-      }
-      } // if stmt
-    } // for loop
+    } // first if stmt
+  } // for loop
+    req.session.used_letters.push(req.session.letter);
+
     if (!found) {
-      req.session.used_letters.push(req.session.letter);
+      // req.session.used_letters.push(req.session.letter);
       req.session.guesses_left = req.session.guesses_left-1;
       console.log(req.session.guesses_left);
-      if (req.session.guesses_left === 0) {
-        req.session.win = false;
-        // res.redirect('./complete');
-        }
+
       }
-  res.render("board", req.session);
-}
+} // end playGame
 
 app.get('/', function(req, res){
   console.log("in app.get");
@@ -80,8 +75,13 @@ app.get('/', function(req, res){
   }
 });
 
+app.get('/complete', function(req, res){
+  console.log("in app.get complete");
+  res.render('complete', req.session);
+});
+
 app.post("/", function (req, res) {
-  console.log("post");
+  console.log("root post");
   setGame(req, res);
 });
 
@@ -89,7 +89,31 @@ app.post("/board", function (req, res) {
   console.log("post board");
   req.session.letter = req.body.letter;
   playGame(req, res);
+  if (JSON.stringify(req.session.board_array) == JSON.stringify(req.session.solution_letters)) {
+    req.session.win = true;
+    console.log("winner!");
+    res.redirect('/complete');
+    // res.render('complete', req.session);
+  }
+  else if (req.session.guesses_left == 0) {
+      req.session.win = false;
+      console.log('loser');
+      res.redirect('/complete');
+      // res.render('complete', req.session);
+      }
+  else {
+    console.log("render board");
+    res.render("board", req.session);
+  }
 });
+
+app.post('/complete', function(req,res){
+  console.log("in app.post complete");
+  req.session.solution = "";
+  console.log(req.session.solution);
+  setGame(req, res);
+  res.redirect('/board');
+})
 
 app.listen(3000, function () {
   console.log('Successfully started express application!');

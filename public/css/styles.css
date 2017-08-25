@@ -1,7 +1,16 @@
 button {
-  height: 5vh;
-  width: 8vh;
+  height: 7vh;
+  width: 10vh;
   background-color: #eae4ff;
+}
+
+input {
+  font-size: 20px;
+}
+
+form {
+  padding: 10px;
+  margin: 10px;
 }
 
 .guess {
@@ -9,11 +18,8 @@ button {
   flex-direction: row;
 }
 
-.class {
+.letter {
   padding-right: 5px;
   margin: 5px;
-}
-
-h3 {
   font-size: 38px;
 }

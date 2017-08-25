@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>Mystery Word</title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      {{#win}}
+        <h2>Congratulations! You win!</h2>
+      {{/win}}
+      {{^win}}
+        <h2>Sorry, you lost. The mystery word was <font color=blue><b>{{solution}}</b></font></h2>
+      {{/win}}
+      <h3>Would you like to play again?</h3>
+      <form action="/complete" method="post">
+        <button id=subbtn name="gamebtn" type="submit">New Game</button>
+      </form>
+    </div>
+  </body>
+</html>
