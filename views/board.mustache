@@ -17,10 +17,10 @@
       </div>
       <!-- <h3>{{board_array}}</h3> -->
       <form action="/board" method="post">
-      <input type="text" name="letter" placeholder="Enter a letter" maxlength="1"/>
+      <input type="text" name="letter" placeholder="Enter a letter" maxlength="1" autofocus/>
       <button id=subbtn type="submit">Make a Guess</button>
       </form>
-      <h4>Letters guessed: {{used_letters}}</h4>
+      <h3>Letters guessed: {{used_letters}}</h3>
     </div>
   </body>
 </html>

@@ -8,14 +8,16 @@ input {
   font-size: 20px;
 }
 
-form {
+
+.container {
+  margin: 20px;
   padding: 10px;
-  margin: 10px;
 }
 
 .guess {
   display: flex;
   flex-direction: row;
+  margin-bottom: 20px;
 }
 
 .letter {
