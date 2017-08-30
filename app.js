@@ -30,6 +30,7 @@ function setGame(req, res) {
     req.session.solution = words[Math.floor(Math.random() * words.length)];
     req.session.used_letters = [];
     req.session.guesses_left = 8;
+    req.session.message = "";
     console.log(req.session.solution);
     req.session.solution_letters = [... req.session.solution];
     req.session.board_array = [];
@@ -49,19 +50,29 @@ function setGame(req, res) {
 
 function playGame(req, res) {
   let found = false;
+  let used = false;
   req.session.letter = req.session.letter.toLowerCase();
-  for (i = 0; i < req.session.solution_letters.length; i++ ){
-    if (req.session.letter === req.session.solution_letters[i]) {
-      req.session.board_array[i] = req.session.letter;
-      found = true;
-    } // first if stmt
-  } // for loop
+  for (j = 0; j < req.session.solution_letters.length; j++ ){
+    if (req.session.letter === req.session.used_letters[j]){
+      req.session.message = "You've already used that letter, please try again";
+      used = true;
+    }
+  }
+    if (!used) {
+      for (i = 0; i < req.session.solution_letters.length; i++ ){
+        if (req.session.letter === req.session.solution_letters[i]) {
+          req.session.board_array[i] = req.session.letter;
+          found = true;
+          req.session.message = "You found a match!";
+        } // if [i] stmt
+    } // for i loop
     req.session.used_letters.push(req.session.letter);
-
-    if (!found) {
+  } // if !used
+    if (!found && !used) {
       // req.session.used_letters.push(req.session.letter);
       req.session.guesses_left = req.session.guesses_left-1;
       console.log(req.session.guesses_left);
+      req.session.message = "Sorry, no match";
 
       }
 } // end playGame
