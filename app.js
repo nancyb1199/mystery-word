@@ -49,6 +49,7 @@ function setGame(req, res) {
 
 function playGame(req, res) {
   let found = false;
+  req.session.letter = req.session.letter.toLowerCase();
   for (i = 0; i < req.session.solution_letters.length; i++ ){
     if (req.session.letter === req.session.solution_letters[i]) {
       req.session.board_array[i] = req.session.letter;

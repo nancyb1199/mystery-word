@@ -17,7 +17,10 @@
       </div>
       <!-- <h3>{{board_array}}</h3> -->
       <form action="/board" method="post">
-      <input type="text" name="letter" placeholder="Enter a letter" maxlength="1" autofocus/>
+      <input type="text" name="letter" placeholder="Enter a letter" maxlength="1" autofocus
+      pattern="[A-Za-z]+"
+           oninvalid="setCustomValidity('You must enter a letter')"
+           onchange="try{setCustomValidity('')}catch(e){}"/>
       <button id=subbtn type="submit">Make a Guess</button>
       </form>
       <h3>Letters guessed: {{used_letters}}</h3>

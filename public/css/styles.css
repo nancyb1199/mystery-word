@@ -12,6 +12,7 @@ input {
 .container {
   margin: 20px;
   padding: 10px;
+  /*background-image: url("/img/Mystery.png");*/
 }
 
 .guess {
